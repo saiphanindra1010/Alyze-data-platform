@@ -1,0 +1,36 @@
+/* .Nav{
+    background-color: rgb(167, 143, 143);
+} */
+.nav_container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgb(221, 221, 221);
+  padding: 15px 7%;
+}
+.nav_brand
+{
+    width: 160px;
+    cursor: pointer;
+}
+.nav_itemwrapper
+{
+    flex:2;
+    list-style: none;
+    text-align: center;
+
+
+
+}
+.nav_item
+
+{
+    display: inline-block;
+    margin: 10px 20px;
+
+}
+.nav_link
+{
+    text-decoration: none;
+    color: black;
+}
