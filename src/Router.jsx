@@ -4,6 +4,7 @@ import Pricing from "./pages/pricing";
 import Notfound  from "./pages/notfound";
 import Tickets from "./pages/tickets";
 import Dashboard from "./pages/dashboard";
+import Login from "./pages/login";
 const router = createBrowserRouter(
     [
 
@@ -22,6 +23,10 @@ const router = createBrowserRouter(
         {
             path: "/dashboard",
             element: <Dashboard />
+        },
+        {
+            path: "/login",
+            element: <Login />
         },
         {
             path: "*",
