@@ -1,10 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
 import APP from "./App";
-import Pricing from "./pages/pricing";
+
 import Notfound  from "./pages/notfound";
-import Tickets from "./pages/tickets";
 import Dashboard from "./pages/dashboard";
-import Login from "./pages/login";
+import Home from "./pages/home.jsx";
+import Login from "./pages/Login";
+import Reportslist from "./pages/reportslist";
 const router = createBrowserRouter(
     [
 
@@ -13,20 +14,20 @@ const router = createBrowserRouter(
             element: <APP />
         },
         {
-            path: "/pricing",
-            element: <Pricing />
-        },
-        {
-            path: "/tickets",
-            element: <Tickets />
-        },
-        {
             path: "/dashboard",
             element: <Dashboard />
         },
         {
+            path: "/home",
+            element: <Home />
+        },
+        {
             path: "/login",
             element: <Login />
+        },
+        {
+            path: "/reportslist",
+            element: < Reportslist/>
         },
         {
             path: "*",

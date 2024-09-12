@@ -1,19 +1,50 @@
-
-.login
-{
+.login {
     /* background-color: rgb(230, 208, 198); */
     height: 100vh;
     width: 40vw;
 }
 
-.iframediv
-{
+/* Add this to your login.module.css */
+@media (max-width: 768px) {
+    .main {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+    .buttonContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        position: absolute; /* Add this to position the container absolutely */
+        top: 50%; /* Add this to position the container 50% from the top */
+        left: 50%; /* Add this to position the container 50% from the left */
+        transform: translate(-50%, -50%); /* Add this to translate the container to the center */
+    }
+    .iframe {
+      display: none;
+    }
+
+    .iframediv {
+          display:none
+    }
+}
+
+.buttonContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px; /* Adjust the gap between buttons as needed */
+}
+
+.iframediv {
     /* background-color: aqua; */
     height: 100vh;
+    /* display: none; */
     width: 60vw;
 }
-.iframe
-{
+
+.iframe {
     /* background-color: aqua; */
     height: 100vh;
     width: 60vw;
