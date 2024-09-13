@@ -6,20 +6,23 @@ import Dashboard from "./pages/dashboard";
 import Home from "./pages/home.jsx";
 import Login from "./pages/Login";
 import Reportslist from "./pages/reportslist";
+import AuthRoute from "./components/authroute/authroute";
+import { Navigate } from "react-router-dom";
+const isAuthenticated = true
 const router = createBrowserRouter(
     [
 
         {
             path: "/",
-            element: <APP />
+            element: isAuthenticated ? <Navigate to="/home" /> : <Navigate to="/login" />
         },
         {
             path: "/dashboard",
-            element: <Dashboard />
+            element: <AuthRoute element={Dashboard} isAuthenticated={isAuthenticated} />
         },
         {
             path: "/home",
-            element: <Home />
+            element:  <AuthRoute element={Home} isAuthenticated={isAuthenticated} />
         },
         {
             path: "/login",
@@ -27,7 +30,7 @@ const router = createBrowserRouter(
         },
         {
             path: "/reportslist",
-            element: < Reportslist/>
+            element: <AuthRoute element={Reportslist} isAuthenticated={isAuthenticated} />
         },
         {
             path: "*",
