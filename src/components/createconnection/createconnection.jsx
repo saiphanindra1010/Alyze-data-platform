@@ -1,5 +1,3 @@
-import React from 'react'
-
 import {
   Dialog,
   DialogContent,
@@ -15,7 +13,6 @@ import {
     SelectItem,
     SelectGroup,
     SelectTrigger,
-    SelectLabel,
     SelectValue,
   } from "@/components/ui/select"
   import { useState } from 'react';
