@@ -1,18 +1,22 @@
-import React from 'react'
-import Sidebar from '@/components/sidebar/sidebar'
-import Navbar from '@/components/navbar/navbar'
 
-const home = () => {
+import Layout from '@/components/layout/layout';
+import { Outlet } from 'react-router-dom';
+import { useState } from 'react';
+import Reportslist from './reportslist';
+
+  import Connections from './connections';
+const Home = () => {
+
 
   return (
-   <>
-    <Navbar />
-    <main>
+    <>
+      <Layout >
+      <Reportslist/>
+      <input ></input>
+      </Layout>
+       {/* This Outlet is necessary to render nested routes under /home */}
+    </>
+  );
+};
 
-    </main>
-
-   </>
-  )
-}
-
-export default home
+export default Home;
