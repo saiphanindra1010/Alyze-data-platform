@@ -1,30 +1,18 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import PropTypes from "prop-types";
-import { Link,  } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
   LayoutDashboard,
   PlugZap,
   BadgeHelp,
   UserPen,
   BrainCircuit,
-  Info,
-  Menu,
   FileDigit,
-  Database,
   DatabaseZap,
   ArrowBigLeft,
   X,
 } from "lucide-react";
-const env = import.meta.env;
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 import Topnav from "../topnav/topnav";
-import Connections from "@/pages/connections";
-import Dbchat from "@/pages/dbchat";
 
 const Layout = ({ children }) => {
   const [isNavOpen, setIsNavOpen] = useState(false);
@@ -32,16 +20,6 @@ const Layout = ({ children }) => {
   const toggleNav = () => {
     setIsNavOpen(!isNavOpen);
   };
-
-  // const renderContent = () => {
-  //   const location = useLocation();
-  //   switch (location.pathname) {
-  //     case '/connections':
-  //       return <Connections />;
-  //     default:
-  //       return <Dbchat />;
-  //   }
-  // };
 
   return (
     <>
@@ -71,7 +49,6 @@ const Layout = ({ children }) => {
                     to="/analyze"
                     className="flex items-center hover:text-blue-600"
                   >
-                    
                     <BrainCircuit className="mr-2" /> Analyze Report
                   </Link>
                 </li>
