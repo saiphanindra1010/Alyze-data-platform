@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Bot, Send, User,Database } from "lucide-react";
+import { Bot, Send, User,Database,History } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
 import {
   Select,
@@ -15,6 +15,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+
 import Layout from "@/components/layout/layout";
 const dbchat = () => {
   const [messages, setMessages] = useState([
@@ -41,8 +42,8 @@ const dbchat = () => {
 
   return (
     <Layout>
-    <div className=" w-full max-w-7xl mx-auto h-[700px] flex flex-col">
-      <div className="p-4  ">
+    <div className=" w-full  max-w-7xl mx-auto h-full flex flex-col">
+      <div className="p-4 flex justify-between ">
         {/* <h1 className="text-2xl font-bold">AI Chat Assistant</h1> */}
         <Select>
       <SelectTrigger className="w-[180px] border-transparent">
@@ -57,6 +58,7 @@ const dbchat = () => {
         </SelectGroup>
       </SelectContent>
     </Select>
+    <History/>
       </div>
       <ScrollArea className="flex-grow p-4">
         <div className="space-y-4">

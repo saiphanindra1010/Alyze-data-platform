@@ -1,16 +1,14 @@
 
 import './App.css'
 
-import ErrorBoundary from './components/ErrorBoundary.jsx'
+import ErrorBoundary from './pages/ErrorBoundary.jsx'
 // import Model from './components/model/model'
-
+import { RouterProvider } from "react-router-dom";
+import router from "./Router.jsx";
 function App() {
   return (
     <>
-     <ErrorBoundary>
-    <div>hello</div>
-      {/* <Model/> */}
-    </ErrorBoundary>
+        <RouterProvider router={router} />
     </>
   )
 }

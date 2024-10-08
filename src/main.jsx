@@ -1,20 +1,19 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
-import router from './Router.jsx'
-import './index.css'
+import "./index.css";
+import ErrorBoundary from "./pages/ErrorBoundary.jsx";
+import App from "./App.jsx";
+const env = import.meta.env;
 
-import {
-  RouterProvider,
-} from "react-router-dom";
-
-
-ReactDOM.createRoot(document.getElementById('root')).render(
-
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
- 
-<RouterProvider router={router}/>
-    {/* <App /> */}
-
-  </React.StrictMode>,
-)
+    <ErrorBoundary>
+      <GoogleOAuthProvider clientId={env.VITE_CLIENTID}>
+        {/* <RouterProvider router={router} /> */}
+        <App/>
+      </GoogleOAuthProvider>
+    </ErrorBoundary>
+  </React.StrictMode>
+);
