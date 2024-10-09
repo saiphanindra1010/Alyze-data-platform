@@ -104,7 +104,7 @@ const Login = () => {
       <div className={styles.iframediv}>
         <iframe
           className={styles.iframe}
-          src="https://learn.microsoft.com/en-us/power-pages/getting-started/add-iframe"
+          src=""
           title="Microsoft Learn"
         ></iframe>
       </div>
