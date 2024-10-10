@@ -17,7 +17,7 @@ import Analyzereport from "./pages/Analyzereport.jsx";
 import ErrorBoundary from "./pages/ErrorBoundary";
 const token = localStorage.getItem('token');
 const isAuthenticated = !!token; 
-console.log(isAuthenticated)
+console.log("is auth  "+isAuthenticated)
 // const isAuthenticated = true
 const router = createBrowserRouter(
     [
@@ -40,7 +40,7 @@ const router = createBrowserRouter(
         },
         {
             path: "/login",
-            element: <Login />
+            element:  isAuthenticated ? <Navigate to="/home" /> : <Login/>,
         },
         // {
         //     path: "/reportslist",
