@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Outlet } from "react-router-dom";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import {
@@ -12,9 +12,11 @@ import {
   ArrowBigLeft,
   X,
 } from "lucide-react";
+import { useState } from "react";
+import Styles from "./layout.module.css";
 import Topnav from "../topnav/topnav";
 
-const Layout = ({ children }) => {
+const Layout = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
 
   const toggleNav = () => {
@@ -27,70 +29,50 @@ const Layout = ({ children }) => {
       <button className="md:hidden p-4" onClick={toggleNav}>
         {isNavOpen ? <X size={24} /> : <ArrowBigLeft size={24} />}
       </button>
-      <div className="flex h-screen ">
+      <div className="flex overflow-hidden h-3/5 ">
         <nav
-          className={`border-r-2  border-solid w-1/6 pt-6 h-[calc(100vh-5rem)] fixed md:relative z-10 transform ${
+          className={`w-52 pt-6 h-[calc(100vh-5rem)] fixed md:relative z-10 transform ${
             isNavOpen ? "translate-x-0 w-5/6" : "-translate-x-full"
           } md:translate-x-0 transition-transform duration-300 ease-in-out`}
         >
           <div className="flex flex-col justify-between h-full">
             <div className="flex flex-col items-center">
-              <ul className="space-y-4">
-                <li>
-                  <Link
-                    to="/home"
-                    className="flex items-center hover:text-blue-600"
-                  >
+              <ul className="space-y-3">
+                <li className="p-3 border-none rounded-lg hover:bg-primary">
+                  <Link to="/home" className="flex items-center">
                     <LayoutDashboard className="mr-2" /> Generated Reports
                   </Link>
                 </li>
-                <li>
-                  <Link
-                    to="/analyze"
-                    className="flex items-center hover:text-blue-600"
-                  >
+                <li
+                  className={`${Styles.hover} p-3 border-none rounded-lg hover:bg-primary`}
+                >
+                  <Link to="/analyze" className="flex items-center">
                     <BrainCircuit className="mr-2" /> Analyze Report
                   </Link>
                 </li>
-                <li>
+                <li className="p-3 border-none rounded-lg hover:bg-primary">
                   <Link
                     to="/connections"
-                    className="flex items-center hover:text-blue-600"
+                    className="flex items-center hover:bg-primary"
                   >
                     <PlugZap className="mr-2" /> Connections
                   </Link>
                 </li>
-                <li>
-                  <Link
-                    to="/talktodb"
-                    className="flex items-center hover:text-blue-600"
-                  >
+                <li className="p-3 border-none rounded-lg hover:bg-primary">
+                  <Link to="/talktodb" className="flex items-center">
                     <DatabaseZap className="mr-2" /> Talk to Database
                   </Link>
                 </li>
-                <li>
-                  <Link
-                    to="/filechat"
-                    className="flex items-center hover:text-blue-600"
-                  >
+                <li className="p-3 border-none rounded-lg hover:bg-primary">
+                  <Link to="/filechat" className="flex items-center">
                     <FileDigit className="mr-2" /> Talk to Files
-                    {/* <TooltipProvider>
-                      <Tooltip>
-                        <TooltipTrigger>
-                          <Info />
-                        </TooltipTrigger>
-                        <TooltipContent>
-                          <p>Add to library</p>
-                        </TooltipContent>
-                      </Tooltip>
-                    </TooltipProvider> */}
                   </Link>
                 </li>
               </ul>
             </div>
             <div className="flex flex-col items-center">
               <ul className="space-y-4">
-                <li>
+                <li className="p-3 border-none rounded-lg">
                   <Link
                     to="/connectionss"
                     className="flex items-center hover:text-blue-600"
@@ -98,7 +80,7 @@ const Layout = ({ children }) => {
                     <BadgeHelp className="mr-2" /> Help
                   </Link>
                 </li>
-                <li>
+                <li className="p-1 border-none rounded-lg">
                   <Link
                     to="/profile"
                     className="flex items-center hover:text-blue-600"
@@ -106,25 +88,20 @@ const Layout = ({ children }) => {
                     <UserPen className="mr-2" /> Profile
                   </Link>
                 </li>
-                <li>
-                  {/* <Button className="flex justify-center">
-                    <LogOut /> Sign out
-                  </Button> */}
-                </li>
               </ul>
             </div>
           </div>
         </nav>
-        <div className="flex-1 overflow-y-auto p-4 ml-0 md:ml-1/6">
-          {children}
+        <div className="flex-1 overflow-y-auto p-4 ml-0 md:ml-1/6 h-[calc(100vh-5rem)]">
+          <Outlet />
         </div>
       </div>
     </>
   );
 };
 
-Layout.propTypes = {
-  children: PropTypes.node.isRequired,
-};
+// Layout.propTypes = {
+//   children: PropTypes.node.isRequired,
+// };
 
 export default Layout;
