@@ -1,6 +1,5 @@
 import {
   Card,
-  CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
@@ -11,7 +10,7 @@ import { Button } from "@/components/ui/button";
 import Layout from "@/components/layout/layout";
 const reportslist = () => {
   return (
-    <Layout>
+
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
       <div>
           <Card className="w-[350px]">
@@ -22,14 +21,14 @@ const reportslist = () => {
               </CardDescription>
             </CardHeader>
             <CardFooter className="flex justify-between">
-              <Button variant="ghost">
+              <Button >
                 <Download />
               </Button>
             </CardFooter>
           </Card>
         </div>    
       </div>
-    </Layout>
+ 
   );
 };
 

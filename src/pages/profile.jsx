@@ -13,8 +13,8 @@ import { Progress } from "@/components/ui/progress"
 
 const Profile = () => {
   return (
-    <Layout>
-      <div className="flex flex-col items-center justify-center h-full p-4 bg-gray-50">
+  
+      <div className="flex flex-col items-center justify-center h-full p-4">
         <Card className="w-full max-w-md shadow-lg">
           <CardHeader>
             <CardTitle className="text-2xl font-bold text-center">Profile</CardTitle>
@@ -47,7 +47,7 @@ const Profile = () => {
           </CardContent>
         </Card>
       </div>
-    </Layout>
+ 
   );
 };
 

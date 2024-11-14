@@ -3,11 +3,10 @@ import Layout from "@/components/layout/layout";
 const filechat = () => {
 
   return (
-    <Layout>
 
 
     <div>filechat</div>
-    </Layout>
+
 
   )
 }

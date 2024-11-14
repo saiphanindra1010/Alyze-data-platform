@@ -41,7 +41,7 @@ const dbchat = () => {
   };
 
   return (
-    <Layout>
+   
     <div className=" w-full  max-w-7xl mx-auto h-full flex flex-col">
       <div className="p-4 flex justify-between ">
         {/* <h1 className="text-2xl font-bold">AI Chat Assistant</h1> */}
@@ -113,7 +113,7 @@ const dbchat = () => {
         </form>
       </div>
     </div>
-    </Layout>
+ 
   );
 };
 
