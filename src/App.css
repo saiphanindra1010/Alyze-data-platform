@@ -2,3 +2,8 @@
   padding: 0;
   margin: 0;
 }
+
+.layoutmain {
+  overflow: hidden; /* Prevent scrolling in the parent layout */
+  height: 100vh;    /* Ensure it takes the full viewport height */
+}

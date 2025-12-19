@@ -1,5 +1,6 @@
 import axios from 'axios'
+const beurl= import.meta.env.VITE_BEAPI;
 const api=axios.create({
-    baseURL:'http://localhost:5000/auth'
+    baseURL:beurl+'/auth'
 })
 export const googleAuth=(code)=>api.get(`/googleauth?code=${code}`)

@@ -1,15 +1,15 @@
 
 import './App.css'
-
-import ErrorBoundary from './pages/ErrorBoundary.jsx'
-// import Model from './components/model/model'
 import { RouterProvider } from "react-router-dom";
-import router from "./Router.jsx";
+import Router from "./Router.jsx";
+import { ThemeProvider } from "./components/theme-provider";
+
 function App() {
+
   return (
-    <>
-        <RouterProvider router={router} />
-    </>
+    <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
+      <RouterProvider router={Router()} />
+    </ThemeProvider>
   )
 }
 
