@@ -1,6 +1,6 @@
-import React from "react";
 import { Navigate } from "react-router-dom";
 const authroute = ({ element: Component, isAuthenticated, ...rest }) => {
+  console.log("AuthRoute: isAuthenticated:", isAuthenticated);
   return isAuthenticated ? <Component {...rest} /> : <Navigate to="/login" />;
 };
 

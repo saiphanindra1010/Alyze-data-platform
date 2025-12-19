@@ -1,6 +1,5 @@
-import { Outlet } from "react-router-dom";
-import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { Outlet, Link, useLocation } from "react-router-dom";
+import { useState } from "react";
 import {
   LayoutDashboard,
   PlugZap,
@@ -9,99 +8,161 @@ import {
   BrainCircuit,
   FileDigit,
   DatabaseZap,
-  ArrowBigLeft,
+  ArrowBigRight,
+  ExternalLink,
   X,
 } from "lucide-react";
-import { useState } from "react";
-import Styles from "./layout.module.css";
 import Topnav from "../topnav/topnav";
 
 const Layout = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
+  const location = useLocation();
 
   const toggleNav = () => {
     setIsNavOpen(!isNavOpen);
   };
 
+  const isActive = (path) => location.pathname === path;
+
+  const navItems = [
+    { path: "/dashboard", icon: LayoutDashboard, label: "Dashboard" },
+    { path: "/home", icon: FileDigit, label: "Reports" },
+    { path: "/analyze", icon: BrainCircuit, label: "Analyze Report" },
+    { path: "/connections", icon: PlugZap, label: "Connections" },
+    { path: "/talktodb", icon: DatabaseZap, label: "Talk to Database" },
+    { path: "/filechat", icon: FileDigit, label: "Talk to Files" },
+  ];
+
+  const bottomItems = [
+    { path: "/help", icon: BadgeHelp, label: "Help", external: true },
+    { path: "/profile", icon: UserPen, label: "Profile" },
+  ];
+
   return (
-    <>
+    <div className="relative flex min-h-screen flex-col bg-background">
       <Topnav />
-      <button className="md:hidden p-4" onClick={toggleNav}>
-        {isNavOpen ? <X size={24} /> : <ArrowBigLeft size={24} />}
-      </button>
-      <div className="flex overflow-hidden h-3/5 ">
-        <nav
-          className={`w-52 pt-6 h-[calc(100vh-5rem)] fixed md:relative z-10 transform ${
-            isNavOpen ? "translate-x-0 w-5/6" : "-translate-x-full"
-          } md:translate-x-0 transition-transform duration-300 ease-in-out`}
-        >
-          <div className="flex flex-col justify-between h-full">
-            <div className="flex flex-col items-center">
-              <ul className="space-y-3">
-                <li className="p-3 border-none rounded-lg hover:bg-primary">
-                  <Link to="/home" className="flex items-center">
-                    <LayoutDashboard className="mr-2" /> Generated Reports
-                  </Link>
-                </li>
-                <li
-                  className={`${Styles.hover} p-3 border-none rounded-lg hover:bg-primary`}
-                >
-                  <Link to="/analyze" className="flex items-center">
-                    <BrainCircuit className="mr-2" /> Analyze Report
-                  </Link>
-                </li>
-                <li className="p-3 border-none rounded-lg hover:bg-primary">
+
+      <div className="flex-1 items-start md:grid md:grid-cols-[240px_minmax(0,1fr)] lg:grid-cols-[260px_minmax(0,1fr)]">
+        <aside className="fixed top-14 z-30 -ml-2 hidden h-[calc(100vh-3.5rem)] w-full shrink-0 overflow-y-auto border-r bg-background/50 md:sticky md:block">
+          <div className="relative overflow-hidden h-full py-6 pr-4 pl-6">
+            <div className="flex flex-col justify-between h-full">
+              <div className="flex flex-col space-y-6">
+                <div>
+                  <h4 className="mb-2 px-3 text-[11px] font-bold uppercase tracking-widest text-muted-foreground/60">
+                    Main
+                  </h4>
+                  <div className="flex flex-col space-y-1">
+                    {navItems.map((item) => (
+                      <Link
+                        key={item.path}
+                        to={item.path}
+                        className={`group flex items-center rounded-md px-3 py-2 text-sm font-medium transition-all duration-200 ${isActive(item.path)
+                          ? "bg-primary/10 text-primary"
+                          : "text-muted-foreground hover:bg-accent hover:text-foreground"
+                          }`}
+                      >
+                        <item.icon className={`mr-2 h-4 w-4 transition-colors ${isActive(item.path) ? "text-primary" : "text-muted-foreground group-hover:text-foreground"
+                          }`} />
+                        {item.label}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex flex-col space-y-1 pb-4">
+                <h4 className="mb-2 px-3 text-[11px] font-bold uppercase tracking-widest text-muted-foreground/60">
+                  Settings
+                </h4>
+                {bottomItems.map((item) => (
                   <Link
-                    to="/connections"
-                    className="flex items-center hover:bg-primary"
+                    key={item.path}
+                    to={item.path}
+                    className={`group flex items-center rounded-md px-3 py-2 text-sm font-medium transition-all duration-200 ${isActive(item.path)
+                      ? "bg-primary/10 text-primary"
+                      : "text-muted-foreground hover:bg-accent hover:text-foreground"
+                      }`}
                   >
-                    <PlugZap className="mr-2" /> Connections
+                    <item.icon className={`mr-2 h-4 w-4 transition-colors ${isActive(item.path) ? "text-primary" : "text-muted-foreground group-hover:text-foreground"
+                      }`} />
+                    {item.label}
+                    {item.external && <ExternalLink className="ml-auto h-4 w-4 opacity-50 group-hover:opacity-100 transition-opacity" />}
                   </Link>
-                </li>
-                <li className="p-3 border-none rounded-lg hover:bg-primary">
-                  <Link to="/talktodb" className="flex items-center">
-                    <DatabaseZap className="mr-2" /> Talk to Database
-                  </Link>
-                </li>
-                <li className="p-3 border-none rounded-lg hover:bg-primary">
-                  <Link to="/filechat" className="flex items-center">
-                    <FileDigit className="mr-2" /> Talk to Files
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <div className="flex flex-col items-center">
-              <ul className="space-y-4">
-                <li className="p-3 border-none rounded-lg">
-                  <Link
-                    to="/connectionss"
-                    className="flex items-center hover:text-blue-600"
-                  >
-                    <BadgeHelp className="mr-2" /> Help
-                  </Link>
-                </li>
-                <li className="p-1 border-none rounded-lg">
-                  <Link
-                    to="/profile"
-                    className="flex items-center hover:text-blue-600"
-                  >
-                    <UserPen className="mr-2" /> Profile
-                  </Link>
-                </li>
-              </ul>
+                ))}
+              </div>
             </div>
           </div>
-        </nav>
-        <div className="flex-1 overflow-y-auto p-4 ml-0 md:ml-1/6 h-[calc(100vh-5rem)]">
-          <Outlet />
-        </div>
+        </aside>
+
+        <main className="relative py-6 lg:gap-10 lg:py-8 px-6 md:px-10">
+          <div className="mx-auto w-full max-w-5xl">
+            <Outlet />
+          </div>
+        </main>
       </div>
-    </>
+
+      {/* Mobile Nav Toggle */}
+      <button
+        className="fixed bottom-6 right-6 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-xl md:hidden transition-transform active:scale-95"
+        onClick={toggleNav}
+      >
+        {isNavOpen ? <X size={24} /> : <ArrowBigRight size={24} />}
+      </button>
+
+      {/* Mobile Nav Overlay */}
+      {isNavOpen && (
+        <div className="fixed inset-0 z-40 bg-background/80 backdrop-blur-sm md:hidden animate-in fade-in duration-200" onClick={toggleNav}>
+          <div className="fixed inset-y-0 left-0 z-50 w-[280px] border-r bg-background p-6 shadow-2xl sm:max-w-sm animate-in slide-in-from-left duration-300">
+            <div className="flex flex-col space-y-8 mt-10">
+              <div>
+                <h4 className="mb-4 px-3 text-[11px] font-bold uppercase tracking-widest text-muted-foreground/60">
+                  Main
+                </h4>
+                <div className="flex flex-col space-y-2">
+                  {navItems.map((item) => (
+                    <Link
+                      key={item.path}
+                      to={item.path}
+                      onClick={toggleNav}
+                      className={`flex items-center rounded-lg px-4 py-3 text-base font-medium transition-colors ${isActive(item.path)
+                        ? "bg-primary/10 text-primary"
+                        : "text-muted-foreground hover:bg-accent hover:text-foreground"
+                        }`}
+                    >
+                      <item.icon className="mr-4 h-5 w-5" />
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <h4 className="mb-4 px-3 text-[11px] font-bold uppercase tracking-widest text-muted-foreground/60">
+                  Settings
+                </h4>
+                <div className="flex flex-col space-y-2">
+                  {bottomItems.map((item) => (
+                    <Link
+                      key={item.path}
+                      to={item.path}
+                      onClick={toggleNav}
+                      className={`flex items-center rounded-lg px-4 py-3 text-base font-medium transition-colors ${isActive(item.path)
+                        ? "bg-primary/10 text-primary"
+                        : "text-muted-foreground hover:bg-accent hover:text-foreground"
+                        }`}
+                    >
+                      <item.icon className="mr-4 h-5 w-5" />
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
   );
 };
-
-// Layout.propTypes = {
-//   children: PropTypes.node.isRequired,
-// };
 
 export default Layout;
