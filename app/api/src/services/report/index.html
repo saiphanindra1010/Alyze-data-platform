@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Analytics Report</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1, h2 {
+            color: #2c3e50;
+        }
+        .chart-container {
+            margin-bottom: 30px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Data Analytics Report</h1>
+    
+    <h2>Executive Summary</h2>
+    <p>This report provides an overview of our company's performance in the last quarter, focusing on sales, customer satisfaction, and market trends.</p>
+    
+    <h2>Sales Performance</h2>
+    <div class="chart-container">
+        <canvas id="salesChart"></canvas>
+    </div>
+    
+    <h2>Customer Satisfaction</h2>
+    <div class="chart-container">
+        <canvas id="satisfactionChart"></canvas>
+    </div>
+    
+    <h2>Market Share</h2>
+    <div class="chart-container">
+        <canvas id="marketShareChart"></canvas>
+    </div>
+    
+    <h2>Key Metrics</h2>
+    <table>
+        <tr>
+            <th>Metric</th>
+            <th>Value</th>
+            <th>YoY Change</th>
+        </tr>
+        <tr>
+            <td>Total Revenue</td>
+            <td>$10.5M</td>
+            <td>+15%</td>
+        </tr>
+        <tr>
+            <td>Customer Acquisition Cost</td>
+            <td>$120</td>
+            <td>-5%</td>
+        </tr>
+        <tr>
+            <td>Customer Lifetime Value</td>
+            <td>$1,200</td>
+            <td>+10%</td>
+        </tr>
+        <tr>
+            <td>Net Promoter Score</td>
+            <td>72</td>
+            <td>+5 points</td>
+        </tr>
+    </table>
+    
+    <script>
+        // Sales Data
+        const salesCtx = document.getElementById('salesChart').getContext('2d');
+        new Chart(salesCtx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                datasets: [{
+                    label: 'Sales ($)',
+                    data: [1200000, 1350000, 1400000, 1600000, 1800000, 2000000],
+                    borderColor: 'rgb(75, 192, 192)',
+                    tension: 0.1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Monthly Sales'
+                    }
+                }
+            }
+        });
+        
+        // Customer Satisfaction Data
+        const satisfactionCtx = document.getElementById('satisfactionChart').getContext('2d');
+        new Chart(satisfactionCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Very Satisfied', 'Satisfied', 'Neutral', 'Dissatisfied', 'Very Dissatisfied'],
+                datasets: [{
+                    label: 'Number of Customers',
+                    data: [500, 300, 100, 50, 20],
+                    backgroundColor: [
+                        'rgba(75, 192, 192, 0.6)',
+                        'rgba(54, 162, 235, 0.6)',
+                        'rgba(255, 206, 86, 0.6)',
+                        'rgba(255, 99, 132, 0.6)',
+                        'rgba(153, 102, 255, 0.6)'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Customer Satisfaction Levels'
+                    }
+                }
+            }
+        });
+        
+        // Market Share Data
+        const marketShareCtx = document.getElementById('marketShareChart').getContext('2d');
+        new Chart(marketShareCtx, {
+            type: 'pie',
+            data: {
+                labels: ['Our Company', 'Competitor A', 'Competitor B', 'Others'],
+                datasets: [{
+                    data: [30, 25, 20, 25],
+                    backgroundColor: [
+                        'rgba(75, 192, 192, 0.6)',
+                        'rgba(255, 99, 132, 0.6)',
+                        'rgba(255, 206, 86, 0.6)',
+                        'rgba(153, 102, 255, 0.6)'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Market Share Distribution'
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
