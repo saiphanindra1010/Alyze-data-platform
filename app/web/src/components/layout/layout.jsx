@@ -12,7 +12,7 @@ import {
   ExternalLink,
   X,
 } from "lucide-react";
-import Topnav from "../topnav/topnav";
+import Topnav from "../topnav/topnav.jsx";
 
 const Layout = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
