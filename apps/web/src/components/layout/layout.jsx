@@ -1,5 +1,7 @@
 import { Outlet, Link, useLocation } from "react-router-dom";
 import { useState } from "react";
+import { House,Folder ,HeadCircuit  , Plugs ,Database , FileText } from "phosphor-react";
+
 import {
   LayoutDashboard,
   PlugZap,
@@ -25,7 +27,7 @@ const Layout = () => {
   const isActive = (path) => location.pathname === path;
 
   const navItems = [
-    { path: "/dashboard", icon: LayoutDashboard, label: "Dashboard" },
+    { path: "/dashboard", icon: House, label: "House" },
     { path: "/home", icon: FileDigit, label: "Reports" },
     { path: "/analyze", icon: BrainCircuit, label: "Analyze Report" },
     { path: "/connections", icon: PlugZap, label: "Connections" },
