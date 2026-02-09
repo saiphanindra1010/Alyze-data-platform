@@ -10,9 +10,8 @@ const env = import.meta.env;
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <ErrorBoundary>
-      <GoogleOAuthProvider clientId={env.VITE_CLIENTID}>
-        {/* <RouterProvider router={router} /> */}
-        <App/>
+      <GoogleOAuthProvider clientId={env.VITE_CLIENTID || ""}>
+        <App />
       </GoogleOAuthProvider>
     </ErrorBoundary>
   </React.StrictMode>
