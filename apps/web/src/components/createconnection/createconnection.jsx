@@ -19,7 +19,7 @@ import { useState } from 'react';
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { Button } from '@/components/ui/button';
-import { Plus, Ban, Check } from 'lucide-react';
+import { Plus, Prohibit, Check } from 'phosphor-react';
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 
 const MongoDBform = () => (
@@ -85,7 +85,7 @@ const Createconnection = () => {
       <Dialog>
         <DialogTrigger asChild>
           <Button className="h-10 font-bold uppercase tracking-wider text-xs shadow-md hover:shadow-lg transition-all">
-            <Plus className="mr-2 h-4 w-4" />
+            <Plus size={16} className="mr-2 shrink-0" />
             New Connection
           </Button>
         </DialogTrigger>
@@ -99,7 +99,7 @@ const Createconnection = () => {
 
             {isConnected === true && (
               <Alert className="bg-emerald-500/10 text-emerald-600 border-emerald-500/20 py-2">
-                <Check className="h-4 w-4" />
+                <Check size={16} className="shrink-0" />
                 <AlertTitle className="text-xs font-bold uppercase tracking-wider">Success</AlertTitle>
                 <AlertDescription className="text-xs">Connection established successfully.</AlertDescription>
               </Alert>
@@ -107,7 +107,7 @@ const Createconnection = () => {
 
             {isConnected === false && (
               <Alert variant="destructive" className="py-2">
-                <Ban className="h-4 w-4" />
+                <Prohibit size={16} className="shrink-0" />
                 <AlertTitle className="text-xs font-bold uppercase tracking-wider">Error</AlertTitle>
                 <AlertDescription className="text-xs">Failed to connect. Please check your credentials.</AlertDescription>
               </Alert>

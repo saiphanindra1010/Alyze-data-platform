@@ -1,8 +1,9 @@
 import Logo from "../logo/logo";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { LogOut, Moon, Sun, Monitor } from "lucide-react";
+import { SignOut, Moon, Sun, Monitor } from "phosphor-react";
 import { useTheme } from "../theme-provider";
+import { useAuth, useLicense } from "../../stores/authStore";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,14 +11,21 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-const topnav = () => {
+const Topnav = () => {
   const { theme, setTheme } = useTheme();
+  const { logout } = useAuth();
+  const { licenseType, totalGenerations, generationsUsed } = useLicense();
+  const total = Number(totalGenerations) || 0;
+  const used = Number(generationsUsed) || 0;
+  const left = Math.max(0, total - used);
 
-  const Signout = () => {
-    console.log("signout ");
-    localStorage.clear();
-    sessionStorage.clear();
-    window.location.reload();
+  const Signout = async () => {
+    try {
+      await logout();
+    } catch (error) {
+      console.error("Logout failed:", error);
+      window.location.reload();
+    }
   };
   const env = import.meta.env;
 
@@ -37,7 +45,7 @@ const topnav = () => {
             <div className="flex items-center space-x-2 rounded-full bg-secondary/50 px-3 py-1 border border-border/50">
               <div className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
               <span className="text-[12px] font-medium text-muted-foreground">
-                Trial: <span className="text-foreground">4/5</span> left
+                {licenseType}: <span className="text-foreground">{left}/{total}</span> left
               </span>
             </div>
           </div>
@@ -48,23 +56,23 @@ const topnav = () => {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="icon" className="h-8 w-8 rounded-md hover:bg-accent transition-colors">
-                  {theme === "light" && <Sun className="h-[1.1rem] w-[1.1rem]" />}
-                  {theme === "dark" && <Moon className="h-[1.1rem] w-[1.1rem]" />}
-                  {theme === "system" && <Monitor className="h-[1.1rem] w-[1.1rem]" />}
+                  {theme === "light" && <Sun size={18} className="shrink-0" />}
+                  {theme === "dark" && <Moon size={18} className="shrink-0" />}
+                  {theme === "system" && <Monitor size={18} className="shrink-0" />}
                   <span className="sr-only">Toggle theme</span>
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-36">
                 <DropdownMenuItem onClick={() => setTheme("light")} className="text-xs">
-                  <Sun className="mr-2 h-3.5 w-3.5" />
+                  <Sun size={14} className="mr-2 shrink-0" />
                   <span>Light</span>
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => setTheme("dark")} className="text-xs">
-                  <Moon className="mr-2 h-3.5 w-3.5" />
+                  <Moon size={14} className="mr-2 shrink-0" />
                   <span>Dark</span>
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => setTheme("system")} className="text-xs">
-                  <Monitor className="mr-2 h-3.5 w-3.5" />
+                  <Monitor size={14} className="mr-2 shrink-0" />
                   <span>System</span>
                 </DropdownMenuItem>
               </DropdownMenuContent>
@@ -76,7 +84,7 @@ const topnav = () => {
               onClick={Signout}
               className="h-8 text-xs font-medium text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
             >
-              <LogOut className="mr-2 h-3.5 w-3.5" />
+              <SignOut size={14} className="mr-2 shrink-0" />
               <span className="hidden sm:inline">Sign out</span>
             </Button>
           </div>
@@ -86,4 +94,4 @@ const topnav = () => {
   );
 };
 
-export default topnav;
+export default Topnav;

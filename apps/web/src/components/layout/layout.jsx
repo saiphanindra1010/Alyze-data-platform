@@ -1,19 +1,17 @@
 import { Outlet, Link, useLocation } from "react-router-dom";
 import { useState } from "react";
-import { House,Folder ,HeadCircuit  , Plugs ,Database , FileText } from "phosphor-react";
-
 import {
-  LayoutDashboard,
-  PlugZap,
-  BadgeHelp,
-  UserPen,
-  BrainCircuit,
-  FileDigit,
-  DatabaseZap,
-  ArrowBigRight,
-  ExternalLink,
+  House,
+  Plug,
+  Question,
+  UserCircle,
+  Brain,
+  FileText,
+  Database,
+  CaretRight,
+  ArrowSquareOut,
   X,
-} from "lucide-react";
+} from "phosphor-react";
 import Topnav from "../topnav/topnav.jsx";
 
 const Layout = () => {
@@ -27,17 +25,17 @@ const Layout = () => {
   const isActive = (path) => location.pathname === path;
 
   const navItems = [
-    { path: "/dashboard", icon: House, label: "House" },
-    { path: "/home", icon: FileDigit, label: "Reports" },
-    { path: "/analyze", icon: BrainCircuit, label: "Analyze Report" },
-    { path: "/connections", icon: PlugZap, label: "Connections" },
-    { path: "/talktodb", icon: DatabaseZap, label: "Talk to Database" },
-    { path: "/filechat", icon: FileDigit, label: "Talk to Files" },
+    { path: "/dashboard", icon: House, label: "Dashboard" },
+    { path: "/home", icon: FileText, label: "Reports" },
+    { path: "/analyze", icon: Brain, label: "Analyze Report" },
+    { path: "/connections", icon: Plug, label: "Connections" },
+    { path: "/talktodb", icon: Database, label: "Talk to Database" },
+    { path: "/filechat", icon: FileText, label: "Talk to Files" },
   ];
 
   const bottomItems = [
-    { path: "/help", icon: BadgeHelp, label: "Help", external: true },
-    { path: "/profile", icon: UserPen, label: "Profile" },
+    { path: "/help", icon: Question, label: "Help", external: true },
+    { path: "/profile", icon: UserCircle, label: "Profile" },
   ];
 
   return (
@@ -63,7 +61,7 @@ const Layout = () => {
                           : "text-muted-foreground hover:bg-accent hover:text-foreground"
                           }`}
                       >
-                        <item.icon className={`mr-2 h-4 w-4 transition-colors ${isActive(item.path) ? "text-primary" : "text-muted-foreground group-hover:text-foreground"
+                        <item.icon size={16} className={`mr-2 shrink-0 transition-colors ${isActive(item.path) ? "text-primary" : "text-muted-foreground group-hover:text-foreground"
                           }`} />
                         {item.label}
                       </Link>
@@ -85,10 +83,10 @@ const Layout = () => {
                       : "text-muted-foreground hover:bg-accent hover:text-foreground"
                       }`}
                   >
-                    <item.icon className={`mr-2 h-4 w-4 transition-colors ${isActive(item.path) ? "text-primary" : "text-muted-foreground group-hover:text-foreground"
+                    <item.icon size={16} className={`mr-2 shrink-0 transition-colors ${isActive(item.path) ? "text-primary" : "text-muted-foreground group-hover:text-foreground"
                       }`} />
                     {item.label}
-                    {item.external && <ExternalLink className="ml-auto h-4 w-4 opacity-50 group-hover:opacity-100 transition-opacity" />}
+                    {item.external && <ArrowSquareOut size={16} className="ml-auto opacity-50 group-hover:opacity-100 transition-opacity shrink-0" />}
                   </Link>
                 ))}
               </div>
@@ -108,7 +106,7 @@ const Layout = () => {
         className="fixed bottom-6 right-6 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-xl md:hidden transition-transform active:scale-95"
         onClick={toggleNav}
       >
-        {isNavOpen ? <X size={24} /> : <ArrowBigRight size={24} />}
+        {isNavOpen ? <X size={24} /> : <CaretRight size={24} />}
       </button>
 
       {/* Mobile Nav Overlay */}
@@ -131,7 +129,7 @@ const Layout = () => {
                         : "text-muted-foreground hover:bg-accent hover:text-foreground"
                         }`}
                     >
-                      <item.icon className="mr-4 h-5 w-5" />
+                      <item.icon size={20} className="mr-4 shrink-0" />
                       {item.label}
                     </Link>
                   ))}
@@ -153,7 +151,7 @@ const Layout = () => {
                         : "text-muted-foreground hover:bg-accent hover:text-foreground"
                         }`}
                     >
-                      <item.icon className="mr-4 h-5 w-5" />
+                      <item.icon size={20} className="mr-4 shrink-0" />
                       {item.label}
                     </Link>
                   ))}
