@@ -7,7 +7,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Trash2, MoreVertical, Pencil } from "lucide-react";
+import { Trash, DotsThreeVertical, PencilSimple } from "phosphor-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -94,15 +94,15 @@ const Connectionslist = ({ searchQuery = '' }) => {
                             <DropdownMenuTrigger asChild>
                               <Button variant="ghost" className="h-8 w-8 p-0 opacity-0 group-hover:opacity-100 transition-opacity">
                                 <span className="sr-only">Open menu</span>
-                                <MoreVertical className="h-4 w-4" />
+                                <DotsThreeVertical size={16} className="shrink-0" />
                               </Button>
                             </DropdownMenuTrigger>
                             <DropdownMenuContent align="end" className="w-32">
                               <DropdownMenuItem className="text-xs">
-                                <Pencil className="mr-2 h-3.5 w-3.5" /> Edit
+                                <PencilSimple size={14} className="mr-2 shrink-0" /> Edit
                               </DropdownMenuItem>
                               <DropdownMenuItem className="text-destructive text-xs focus:text-destructive">
-                                <Trash2 className="mr-2 h-3.5 w-3.5" /> Delete
+                                <Trash size={14} className="mr-2 shrink-0" /> Delete
                               </DropdownMenuItem>
                             </DropdownMenuContent>
                           </DropdownMenu>

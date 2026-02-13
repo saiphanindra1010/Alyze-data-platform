@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Layout from '@/components/layout/layout';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -10,64 +9,105 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-
+import { SecureAPI } from "../lib/authService";
+import { useToast } from "@/hooks/use-toast";
 
 const Profile = () => {
+  const { toast } = useToast();
   const defaultUserData = {
     name: '',
     email: '',
     generationsUsed: 0,
     totalGenerations: 0,
+    licenses: [{ licensesType: 'trial', totalGenerations: 5, generationsUsed: 0 }]
   };
 
   const [userData, setUserData] = useState(defaultUserData);
-  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
-  const handleChange = (event) => {
-    const inputValue = event.target.value;
-    setText(inputValue);
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
-    // Enable the button if there is text, disable otherwise
-    setIsButtonDisabled(inputValue.trim() === "");
-  };
+  // Fetch profile data
   useEffect(() => {
-    // const sessionData = sessionStorage.getItem('licenses');
-
-    // if (sessionData) {
-    //   // Load data from sessionStorage if available
-    //   const userData=JSON.parse(sessionData)[0]
-
-    //   console.log("session data "+JSON.stringify(JSON.parse(sessionData)[0].name))
-    // } else {
-    // Fetch from API or use default data
     const fetchUserData = async () => {
-      const response = await fetch('http://localhost:5000/profile', {
-        method: 'GET',
-        headers: {
-          'cookies': 'efkl32rtj32oikflikwle'
-        },
-        // credentials: 'include',
-      });
-      const data = await response.json();
-      console.log("profile data " + JSON.stringify(data))
-      setUserData(data);
-      setUserData({
-        name: data.profile.name,
-        email: data.profile.email,
-        generationsUsed: data.profile.licenses[0].generationsUsed,
-        totalGenerations: data.profile.licenses[0].totalGenerations
-      });
-      sessionStorage.setItem('userData', JSON.stringify(data)); // Store in sessionStorage
+      try {
+        const response = await SecureAPI.get('/profile');
+        const data = response.data;
+
+        if (data.success && data.profile) {
+          const profile = data.profile;
+          // Handle case where licenses might be empty
+          const license = profile.licenses && profile.licenses.length > 0
+            ? profile.licenses[0]
+            : { totalGenerations: 5, generationsUsed: 0 };
+
+          setUserData({
+            name: profile.name || '',
+            email: profile.email || '',
+            generationsUsed: license.generationsUsed || 0,
+            totalGenerations: license.totalGenerations || 0,
+            ...profile
+          });
+        }
+      } catch (error) {
+        console.error("Failed to fetch profile:", error);
+        toast({
+          variant: "destructive",
+          title: "Error fetching profile",
+          description: "Could not load your profile data. Please try again.",
+        });
+      } finally {
+        setLoading(false);
+      }
     };
 
     fetchUserData();
-    // }
-  }, []);
+  }, [toast]);
 
-  const handleInputChange = (field, value) => {
-    const updatedData = { ...userData, [field]: value };
-    setUserData(updatedData);
-    sessionStorage.setItem('userData', JSON.stringify(updatedData)); // Update sessionStorage
+  const handleNameChange = (e) => {
+    const value = e.target.value;
+    setUserData(prev => ({ ...prev, name: value }));
+    setIsButtonDisabled(value.trim() === "");
   };
+
+  const handleSave = async () => {
+    setSaving(true);
+    try {
+      await SecureAPI.put('/profile', {
+        name: userData.name
+      });
+
+      toast({
+        title: "Profile updated",
+        description: "Your changes have been saved successfully.",
+      });
+
+      setIsButtonDisabled(true);
+    } catch (error) {
+      console.error("Failed to update profile:", error);
+      toast({
+        variant: "destructive",
+        title: "Update failed",
+        description: "Could not save your changes. Please try again.",
+      });
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-[50vh]">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+      </div>
+    );
+  }
+
+  // Calculate safe values for progress bar
+  const total = parseInt(userData.totalGenerations) || 5;
+  const used = parseInt(userData.generationsUsed) || 0;
+  const remaining = Math.max(0, total - used);
+  const percentage = Math.min(100, Math.max(0, (used / total) * 100));
 
   return (
     <div className="flex flex-col items-center justify-center min-h-[calc(100vh-10rem)] p-4">
@@ -88,10 +128,7 @@ const Profile = () => {
                 type="text"
                 className="h-10 bg-background border-border/50 focus:border-primary/50 transition-colors"
                 placeholder="Enter your name"
-                onChange={(e) => {
-                  handleChange(e)
-                  handleInputChange('name', e.target.value)
-                }}
+                onChange={handleNameChange}
               />
             </div>
             <div className="space-y-2">
@@ -114,7 +151,7 @@ const Profile = () => {
             <CardContent className="space-y-4">
               <div className="flex items-baseline justify-between">
                 <div className="text-3xl font-bold tracking-tighter">
-                  {userData.totalGenerations - userData.generationsUsed}
+                  {remaining}
                 </div>
                 <div className="text-xs font-medium text-muted-foreground uppercase tracking-widest">
                   Generations Left
@@ -123,12 +160,12 @@ const Profile = () => {
 
               <div className="space-y-2">
                 <Progress
-                  value={(userData.generationsUsed / userData.totalGenerations) * 100}
+                  value={percentage}
                   className="h-1.5 bg-muted border-none"
                 />
                 <div className="text-[10px] font-medium text-muted-foreground flex justify-between uppercase tracking-widest">
-                  <span>{userData.generationsUsed} used</span>
-                  <span>{userData.totalGenerations} total</span>
+                  <span>{used} used</span>
+                  <span>{total} total</span>
                 </div>
               </div>
 
@@ -140,10 +177,10 @@ const Profile = () => {
 
           <Button
             className="w-full h-11 font-bold uppercase tracking-wider shadow-md hover:shadow-lg transition-all"
-            onClick={() => sessionStorage.setItem('userData', JSON.stringify(userData))}
-            disabled={isButtonDisabled}
+            onClick={handleSave}
+            disabled={isButtonDisabled || saving}
           >
-            Save Changes
+            {saving ? "Saving..." : "Save Changes"}
           </Button>
         </CardContent>
       </Card>

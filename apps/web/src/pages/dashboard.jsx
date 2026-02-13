@@ -2,12 +2,12 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import {
   Database,
   FileText,
-  Zap,
+  Lightning,
   Activity,
   ArrowUpRight,
   ArrowDownRight,
-  Clock
-} from "lucide-react";
+  Clock,
+} from "phosphor-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
@@ -15,7 +15,7 @@ const Dashboard = () => {
   const stats = [
     { title: "Total Connections", value: "12", icon: Database, trend: "+2", trendType: "up", description: "Active database sources" },
     { title: "Reports Generated", value: "148", icon: FileText, trend: "+12%", trendType: "up", description: "Total analysis reports" },
-    { title: "AI Generations", value: "842", icon: Zap, trend: "-5%", trendType: "down", description: "Tokens used this month" },
+    { title: "AI Generations", value: "842", icon: Lightning, trend: "-5%", trendType: "down", description: "Tokens used this month" },
     { title: "Avg. Sync Time", value: "1.2s", icon: Activity, trend: "-0.4s", trendType: "up", description: "Database response time" },
   ];
 
@@ -49,7 +49,7 @@ const Dashboard = () => {
               <div className="flex items-center mt-1">
                 <span className={`text-[10px] font-bold flex items-center ${stat.trendType === 'up' ? 'text-emerald-500' : 'text-rose-500'
                   }`}>
-                  {stat.trendType === 'up' ? <ArrowUpRight className="h-3 w-3 mr-0.5" /> : <ArrowDownRight className="h-3 w-3 mr-0.5" />}
+                  {stat.trendType === 'up' ? <ArrowUpRight size={12} className="mr-0.5 shrink-0" /> : <ArrowDownRight size={12} className="mr-0.5 shrink-0" />}
                   {stat.trend}
                 </span>
                 <span className="text-[10px] text-muted-foreground ml-1.5 font-medium">
@@ -70,7 +70,7 @@ const Dashboard = () => {
           <CardContent>
             <div className="h-[200px] flex items-center justify-center border-2 border-dashed border-border/50 rounded-xl bg-muted/5">
               <div className="flex flex-col items-center text-muted-foreground">
-                <Activity className="h-8 w-8 mb-2 opacity-20" />
+                <Activity size={32} className="mb-2 opacity-20 shrink-0" />
                 <span className="text-xs font-medium uppercase tracking-widest">Performance Chart Placeholder</span>
               </div>
             </div>
@@ -95,7 +95,7 @@ const Dashboard = () => {
                     <p className="text-xs text-muted-foreground">{activity.target}</p>
                   </div>
                   <div className="flex items-center text-[10px] font-medium text-muted-foreground">
-                    <Clock className="h-3 w-3 mr-1" />
+                    <Clock size={12} className="mr-1 shrink-0" />
                     {activity.time}
                   </div>
                 </div>

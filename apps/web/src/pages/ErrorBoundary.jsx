@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from "@/components/ui/button";
-import { RefreshCcw } from "lucide-react";
+import { ArrowClockwise } from "phosphor-react";
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -36,7 +36,7 @@ class ErrorBoundary extends React.Component {
                 size="lg"
                 className="font-bold uppercase tracking-wider px-8"
               >
-                <RefreshCcw className="mr-2 h-4 w-4" />
+                <ArrowClockwise size={16} className="mr-2 shrink-0" />
                 Refresh Page
               </Button>
             </div>

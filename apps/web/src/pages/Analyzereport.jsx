@@ -3,12 +3,12 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter }
 import { Button } from "@/components/ui/button";
 import {
   Database,
-  Sparkles,
+  Sparkle,
   ArrowRight,
-  CheckCircle2,
-  AlertCircle,
-  Activity
-} from "lucide-react";
+  CheckCircle,
+  WarningCircle,
+  Activity,
+} from "phosphor-react";
 import {
   Select,
   SelectContent,
@@ -120,7 +120,7 @@ const Analyzereport = () => {
               ].map((option, i) => (
                 <div key={i} className="flex items-center space-x-3 p-3 rounded-md border border-border/40 hover:bg-muted/30 transition-colors cursor-pointer">
                   <div className="h-4 w-4 rounded border border-primary flex items-center justify-center bg-primary text-primary-foreground">
-                    <CheckCircle2 className="h-3 w-3" />
+                    <CheckCircle size={12} className="shrink-0" />
                   </div>
                   <span className="text-sm font-medium">{option}</span>
                 </div>
@@ -141,7 +141,7 @@ const Analyzereport = () => {
               ) : (
                 <>
                   Run Full Analysis
-                  <ArrowRight className="ml-2 h-4 w-4" />
+                  <ArrowRight size={16} className="ml-2 shrink-0" />
                 </>
               )}
             </Button>
@@ -151,7 +151,7 @@ const Analyzereport = () => {
 
       {!selectedDb && (
         <div className="flex items-center justify-center p-4 rounded-lg bg-amber-500/5 border border-amber-500/10 text-amber-600">
-          <AlertCircle className="mr-2 h-4 w-4" />
+          <WarningCircle size={16} className="mr-2 shrink-0" />
           <span className="text-xs font-bold uppercase tracking-wider">Please select a database connection to proceed</span>
         </div>
       )}

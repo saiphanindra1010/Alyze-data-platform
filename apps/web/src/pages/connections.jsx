@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Createconnection from "@/components/createconnection/createconnection"
 import Connectionslist from "@/pages/Connectionslist"
 import { Input } from "@/components/ui/input"
-import { Search } from "lucide-react"
+import { MagnifyingGlass } from "phosphor-react"
 
 const Connections = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -18,7 +18,7 @@ const Connections = () => {
         </div>
         <div className="flex items-center space-x-3">
           <div className="relative w-full sm:w-64">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+            <MagnifyingGlass size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground shrink-0" />
             <Input
               placeholder="Search..."
               value={searchQuery}

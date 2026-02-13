@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Bot, Send, User, Database, History } from "lucide-react";
+import { Robot, PaperPlaneTilt, User, Database, ClockCounterClockwise } from "phosphor-react";
 import { Textarea } from "@/components/ui/textarea";
 import {
   Select,
@@ -67,7 +67,7 @@ const Dbchat = () => {
             </SelectContent>
           </Select>
           <Button variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground hover:text-foreground">
-            <History className="w-4 h-4" />
+            <ClockCounterClockwise size={16} className="shrink-0" />
           </Button>
         </div>
       </div>
@@ -86,9 +86,9 @@ const Dbchat = () => {
                 <div className={`flex-shrink-0 h-8 w-8 rounded-full flex items-center justify-center border ${message.sender === "user" ? "bg-primary/10 border-primary/20" : "bg-muted border-border/50"
                   }`}>
                   {message.sender === "user" ? (
-                    <User className="w-4 h-4 text-primary" />
+                    <User size={16} className="text-primary shrink-0" />
                   ) : (
-                    <Bot className="w-4 h-4 text-foreground/70" />
+                    <Robot size={16} className="text-foreground/70 shrink-0" />
                   )}
                 </div>
                 <div
@@ -120,7 +120,7 @@ const Dbchat = () => {
             onChange={(e) => setInput(e.target.value)}
           />
           <Button type="submit" size="icon" className="absolute right-1.5 h-9 w-9 rounded-lg shadow-md hover:shadow-lg transition-all" disabled={!input.trim()}>
-            <Send className="w-4 h-4" />
+            <PaperPlaneTilt size={16} className="shrink-0" />
             <span className="sr-only">Send message</span>
           </Button>
         </form>

@@ -6,7 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Download, Search, FileText } from "lucide-react";
+import { DownloadSimple, MagnifyingGlass, FileText } from "phosphor-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
@@ -34,7 +34,7 @@ const Reportslist = () => {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div className="relative w-full sm:w-72">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+          <MagnifyingGlass size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground shrink-0" />
           <Input
             placeholder="Search reports..."
             value={searchQuery}
@@ -69,7 +69,7 @@ const Reportslist = () => {
                   <div className="h-6 w-6 rounded-full border-2 border-background bg-muted flex items-center justify-center text-[8px] font-bold">AS</div>
                 </div>
                 <Button size="sm" variant="secondary" className="h-8 text-xs font-bold uppercase tracking-wider border-border/50 hover:bg-background transition-colors">
-                  <Download className="mr-2 h-3.5 w-3.5" />
+                  <DownloadSimple size={14} className="mr-2 shrink-0" />
                   Download
                 </Button>
               </CardFooter>
@@ -79,7 +79,7 @@ const Reportslist = () => {
       ) : (
         <div className="flex flex-col items-center justify-center py-20 text-center border-2 border-dashed border-border/50 rounded-xl bg-muted/5">
           <div className="h-12 w-12 rounded-full bg-muted flex items-center justify-center mb-4">
-            <FileText className="h-6 w-6 text-muted-foreground" />
+            <FileText size={24} className="text-muted-foreground shrink-0" />
           </div>
           <h3 className="text-lg font-semibold">No reports yet</h3>
           <p className="text-sm text-muted-foreground max-w-xs mx-auto mt-1">
